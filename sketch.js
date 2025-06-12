@@ -127,7 +127,7 @@ function draw() {
 
 function drawLinea() {
   stroke('#CBCCD0');
-  strokeWeight(2);
+  strokeWeight(0);
   line(0, yLinea, width, yLinea);
 }
 
