@@ -41,7 +41,7 @@ class LineaDinamica {
         this.angulo += radians(random(-100, 200));
 
         this.puntos.push({ x, y });
-        if (this.puntos.length > 20) this.puntos.shift();
+        if (this.puntos.length > 10) this.puntos.shift();
 
         this._dibujarCurva();
       }
