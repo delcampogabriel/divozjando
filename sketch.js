@@ -34,7 +34,7 @@ let paleta;
 
 let modoArriba   = false; 
 let cambioHecho  = false; 
-let IMPRIMIR = true;
+let IMPRIMIR = false;
 
 function preload() {
   fondoImg = loadImage('img/background.png');  
