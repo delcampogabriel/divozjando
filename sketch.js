@@ -1,16 +1,17 @@
 //FONDO + IMPLEMENTACION DE LINEAS + ROMBO
 let fondoImg;
+let firmaimagen;
 
 let mic, audioContext, pitch;
 let fft;
 let gestorI, gestorPitch;
 
 let minimoI = 0.009;
-let maximoI = 0.5;
+let maximoI = 0.06;
 let minNota = 40;
 let maxNota = 74;
 
-let umbral = 0.009;  
+let umbral = 0.005;  
 let model_url = 'https://cdn.jsdelivr.net/gh/ml5js/ml5-data-and-models/models/pitch-detection/crepe/';
 
 let pasosActuales = 0;
@@ -30,15 +31,26 @@ let margen   = 130;
 
 let elefante;
 let Z;
-let paleta;
+let paleta = [];
 
 let modoArriba   = false; 
 let cambioHecho  = false; 
 let IMPRIMIR = false;
+let tumama = 0;
+let tiempofirma = false;
+let firma = false;
+let img1;
+let img2;
+let barrera = (maximoI - minimoI) / 1.2 + minimoI;
+let pal;
 
 function preload() {
+  firmaimagen = loadImage('img/firma.png')
   fondoImg = loadImage('img/background.png');  
-  paleta = new Paleta("img/pruebacolor.png");
+  img1 = loadImage("img/pruebacolorcalido.png");
+  img2 = loadImage("img/pruebacolorfrios.png");
+  paleta[0] = new Paleta(img1);
+  paleta[1] = new Paleta(img2);
 
   Z = random([1, 2, 3, 4]);
 
@@ -119,9 +131,22 @@ function draw() {
     transicionArriba,
     gestorI.filtrada
   );
-
+  //de acá hasta el fin del draw es la invocacion del circulo q hace el calibrado, la firma y elll reseteo del cuadro.
+  if (firma){
+    image(firmaimagen, width-96, height-25, 192,108 );
+  }
   if (IMPRIMIR){
     printData();
+  }
+  if (tumama == 1 && !tiempofirma){
+tiempofirma = true;
+  setTimeout(() => {
+  firma = true;
+       }, 7000);
+ setTimeout(() => {
+  location.reload();
+       }, 14000);
+
   }
 }
 

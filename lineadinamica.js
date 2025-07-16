@@ -26,7 +26,7 @@ class LineaDinamica {
     let reps = floor(map(intensidad, 0, 1, 0, 5));
     reps = constrain(reps, 0, 5);
     if (reps === 0) return;
-
+    tumama = 1;
     for (let k = 0; k < reps; k++) {
       this.contador++;
       if (this.contador % this.crecerCada === 0) {

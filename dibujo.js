@@ -7,7 +7,6 @@ class Dibujo {
     this.brushStrokes  = [];
     this.maxStrokes   = 250;    
 
-    //posiciones para las líneas dinámicas
     for (let i = 0; i < 5; i++) {
       let x = map(i, 0, 4, 50, width - 50);
       this.lineas.push(new LineaDinamica(x, yLimite, color(0, 0, 0, 80)));
@@ -29,7 +28,6 @@ mostrarParcial(pasos, transicion, arriba, transicionArriba, intensidad) {
     m.dibujar();
   }
 
-//2)redibuja pinceladas anteriores
   let n = min(this.brushStrokes.length, this.maxStrokes);
   for (let i = 0; i < n; i++) {
     let b = this.brushStrokes[i];
@@ -42,9 +40,7 @@ mostrarParcial(pasos, transicion, arriba, transicionArriba, intensidad) {
   pop();
 }
 
-//genera y dibuja nuevas pinceladas mientras hay voz
 if (intensidad > umbral && this.brushStrokes.length < this.maxStrokes) {
-    //calcula cuántas podemos añadir (hasta 5 por frame, pero sin pasar el max)
     let canGen = min(1, this.maxStrokes - this.brushStrokes.length);
     for (let i = 0; i < canGen; i++) {
       let cual = int(random(cantidad));
@@ -60,7 +56,15 @@ if (intensidad > umbral && this.brushStrokes.length < this.maxStrokes) {
     //calcula transformaciones y color UNA VEZ
     let ang = radians(map(x, 0, width, 0, 90));
     let sc  = random(0.2, 0.5);
-    let col = paleta.darColor(); 
+
+    if (intensidad > barrera) {
+     pal = paleta[0]; // elige entre paleta[0] o paleta[1]
+    }
+    if (intensidad < barrera) {
+     pal = paleta[1]; // elige entre paleta[0] o paleta[1]
+    }
+
+    let col = pal.darColor();
 
     push();
       tint(col);
