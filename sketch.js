@@ -6,8 +6,8 @@ let mic, audioContext, pitch;
 let fft;
 let gestorI, gestorPitch;
 
-let minimoI = 0.009;
-let maximoI = 0.06;
+let minimoI = 0.02;
+let maximoI = 0.2;
 let minNota = 40;
 let maxNota = 74;
 
